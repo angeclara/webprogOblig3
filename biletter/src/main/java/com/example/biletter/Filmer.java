@@ -7,6 +7,8 @@ public class Filmer {
         this.film = film;
     }
 
+    public Filmer() {}
+
     public String getFilm() {
         return film;
     }

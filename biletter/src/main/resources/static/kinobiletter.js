@@ -10,14 +10,14 @@ function fetchMovies() {
 }
 
 function formatMovies(movies) {
-    let ut = "<select>";
-    ut += "<option>Velg film</option>";
+    let valg = "<select id='valg'>";
+    valg += "<option>Velg film</option>";
 
     for (const movie of movies) {
-        ut += "<option>" + movie.film + "</option>";
+        valg += "<option>" + movie.film + "</option>";
     }
-    ut += "</select>";
-    $("#movie").html(ut);
+    valg += "</select>";
+    $("#movie").html(valg);
 }
 
 function kjop() {
@@ -26,7 +26,7 @@ function kjop() {
     let etternavn = document.getElementById("eNavn").value;
     let telefon = document.getElementById("telefonnr").value;
     let epost = document.getElementById("ePost").value;
-    let film = document.getElementById("velg").value;
+    let film = document.getElementById("valg").value;
     let feil1 = "";
     let feil2 = "";
     let feil3 = "";

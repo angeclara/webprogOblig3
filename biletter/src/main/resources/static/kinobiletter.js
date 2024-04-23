@@ -80,37 +80,31 @@ function kjop() {
     $("#ePost").val(ut)
     $("#antall").val(ut);
 
-    function getAll() {
-        $.get("/getAll", function(data){
-           formatData(data);
-        });
-    }
+}
 
-    function formatData(customers) {
-        ut = "<table class='table table-striped'>"
-        ut += "<tr><th>Navn</th><th>Telefonnr</th><th>E-post</th><th>antall</th><th>film</th>"
-        for (const customer of customers) {
-            ut += "<tr>";
-            ut += "<td>" + customer.navn + "</td>";
-            ut += "<td>" + customer.telefon + "</td>";
-            ut += "<td>" + customer.epost + "</td>";
-            ut += "<td>" + customer.antall + "x</td>" + "<td>" + customer.film + "</td></tr>";
-            console.log(customer.navn);
-        }
-        ut += "</table>"
-        $("#customerRegistry").html(ut);
-    }
+function getAll() {
+    $.get("/getAll", function(data){
+        formatData(data);
+    });
+}
 
+function formatData(customers) {
+    ut = "<table class='table table-striped'>"
+    ut += "<tr><th>Navn</th><th>Telefonnr</th><th>E-post</th><th>antall</th><th>film</th>"
+    for (const customer of customers) {
+        ut += "<tr>";
+        ut += "<td>" + customer.navn + "</td>";
+        ut += "<td>" + customer.telefon + "</td>";
+        ut += "<td>" + customer.epost + "</td>";
+        ut += "<td>" + customer.antall + "x</td>" + "<td>" + customer.film + "</td></tr>";
+        console.log(customer.navn);
+    }
+    ut += "</table>"
+    $("#customerRegistry").html(ut);
 }
 
 function slett() {
     $.post("/delete", function () {
-        deleteAll();
+        getAll();
     });
-
-    function deleteAll() {
-        $.get("/deleted", function () {
-            $("#customerRegistry").html("");
-        })
-    }
 }

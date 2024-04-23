@@ -24,9 +24,4 @@ public class BilettController {
     public void  deleteCustomers() {
         customerList.clear();
     }
-
-    @GetMapping("/deleted")
-    public List<Kunde> deleteAll() {
-        return customerList;
-    }
 }

@@ -28,7 +28,7 @@ public class BilettRepsitory {
     }
 
     public List<Filmer> fetchMovies() {
-        String sql = 'SELECT * FROM Filmer';
+        String sql = "SELECT * FROM Filmer";
         List<Filmer> allMovies = db.query(sql, new BeanPropertyRowMapper<>(Filmer.class));
         return allMovies;
     }

@@ -5,7 +5,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -24,6 +25,12 @@ public class BilettRepsitory {
     public List<Kunde> fetchCustomers() {
         String sql = "SELECT * FROM Kunde";
         List<Kunde> allCustomers = db.query(sql, new BeanPropertyRowMapper<>(Kunde.class));
+        Collections.sort(allCustomers, new Comparator<Kunde>() {
+            @Override
+            public int compare(Kunde k1, Kunde k2) {
+                return k1.getNavn().compareTo(k2.getNavn());
+            }
+        });
         return allCustomers;
     }
 

@@ -22,6 +22,11 @@ public class BilettController {
         return rep.fetchCustomers();
     }
 
+    @GetMapping("/fetchMovies")
+    public List<Filmer> fetchMovies() {
+        return rep.fetchMovies();
+    }
+
     @PostMapping("/delete")
     public void  deleteCustomers() {
         rep.deleteAllCustomers();

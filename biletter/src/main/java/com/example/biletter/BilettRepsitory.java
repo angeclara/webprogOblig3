@@ -27,6 +27,12 @@ public class BilettRepsitory {
         return allCustomers;
     }
 
+    public List<Filmer> fetchMovies() {
+        String sql = 'SELECT * FROM Filmer';
+        List<Filmer> allMovies = db.query(sql, new BeanPropertyRowMapper<>(Filmer.class));
+        return allMovies;
+    }
+
     public void deleteAllCustomers() {
         String sql = "DELETE FROM Kunde";
         db.update(sql);

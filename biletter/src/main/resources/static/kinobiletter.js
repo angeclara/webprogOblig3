@@ -1,3 +1,25 @@
+$(function () {
+    getAll();
+    fetchMovies();
+});
+
+function fetchMovies() {
+    $.get("/fetchMovies", function (data) {
+        formatMovies(data);
+    });
+}
+
+function formatMovies(movies) {
+    let ut = "<select>";
+    ut += "<option>Velg film</option>";
+
+    for (const movie of movies) {
+        ut += "<option>" + movie.film + "</option>";
+    }
+    ut += "</select>";
+    $("#movie").html(ut);
+}
+
 function kjop() {
     let antall = document.getElementById("antall").value;
     let fornavn = document.getElementById("fNavn").value;
@@ -84,11 +106,11 @@ function kjop() {
 
 function getAll() {
     $.get("/fetch", function(data){
-        formatData(data);
+        formatCustomers(data);
     });
 }
 
-function formatData(customers) {
+function formatCustomers(customers) {
     ut = "<table class='table table-striped'>"
     ut += "<tr><th>Navn</th><th>Telefonnr</th><th>E-post</th><th>antall</th><th>film</th>"
     for (const customer of customers) {

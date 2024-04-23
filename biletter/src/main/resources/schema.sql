@@ -2,7 +2,6 @@ CREATE TABLE Filmer
 (
     film varchar(100) NOT NULL,
     PRIMARY KEY (film)
-
 );
 
 CREATE TABLE Kunde

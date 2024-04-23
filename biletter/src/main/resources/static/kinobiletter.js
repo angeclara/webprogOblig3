@@ -70,7 +70,7 @@ function kjop() {
         film: film
     };
 
-    $.post("/load", kunde, function () {
+    $.post("/save", kunde, function () {
         getAll();
     });
 
@@ -83,7 +83,7 @@ function kjop() {
 }
 
 function getAll() {
-    $.get("/getAll", function(data){
+    $.get("/fetch", function(data){
         formatData(data);
     });
 }

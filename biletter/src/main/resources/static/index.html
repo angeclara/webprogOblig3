@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Bestilling av kinobiletter</h1>
+            <form class="form">
+                <div class="form-group">
+                    <label for="velg">Velg Film: </label>
+                    <select id="velg" name="Velg film">
+                        <option>The Hunger Games: The Ballad of Songbirds & Snakes</option>
+                        <option>Dune: Part Two</option>
+                        <option>Wonka</option>
+                        <option>Damsel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="antall">Antall  </label>
+                    <input type="text" class="control" id="antall"><span id="feilantall"></span>
+                </div>
+            </form>
+            <table class="table">
+                <tr class="table-group">
+                    <td>Fornavn</td>
+                    <td><input type="text" class="control" id="fNavn"></td><td id="feilnavn"></td>
+                </tr>
+                <tr class="table-group">
+                    <td>Etternavn</td>
+                    <td><input type="text" class="control" id="eNavn"></td><td id="feilenavn"></td>
+                </tr>
+                <tr class="table-group">
+                    <td>Telefonnr</td>
+                    <td><input type="text" class="control" id="telefonnr"></td><td id="feilnummer"></td>
+                </tr>
+                <tr class="table-group">
+                    <td>Epost</td>
+                    <td><input type="text" class="control" id="ePost"></td><td id="feilepost"></td>
+                </tr>
+            </table><br>
+            <button class="btn btn-primary" onclick="kjop()" type="button">Kjøp bilett</button>
+        </div>
+        <div class="col-md-8">
+            <h2>Alle biletter</h2>
+            <div id="customerRegistry"></div>
+            <button class="btn btn-danger" onclick="slett()">Slett alle bilettene</button>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="kinobiletter.js"></script>
+</body>
+</html>

@@ -1,15 +1,16 @@
 package com.example.biletter;
 
 public class Kunde {
-    String navn, film, telefon, epost;
+    String fornavn, etternavn, film, telefon, epost;
     int antall;
 
-    public Kunde(int antall, String film, String navn, String telefon, String epost) {
-        this.antall = antall;
+    public Kunde(String fornavn, String etternavn, String film, String telefon, String epost, int antall) {
+        this.fornavn = fornavn;
+        this.etternavn = etternavn;
         this.film = film;
-        this.navn = navn;
         this.telefon = telefon;
         this.epost = epost;
+        this.antall = antall;
     }
 
     public Kunde() {}
@@ -30,12 +31,20 @@ public class Kunde {
         this.film = film;
     }
 
-    public String getNavn() {
-        return navn;
+    public String getFornavn() {
+        return fornavn;
     }
 
-    public void setNavn(String navn) {
-        this.navn = navn;
+    public void setFornavn(String fornavn) {
+        this.fornavn = fornavn;
+    }
+
+    public String getEtternavn() {
+        return etternavn;
+    }
+
+    public void setEtternavn(String etternavn) {
+        this.etternavn = etternavn;
     }
 
     public String getTelefon() {

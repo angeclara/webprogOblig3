@@ -1,5 +1,7 @@
 package com.example.biletter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,26 +14,41 @@ import java.util.List;
 @Repository
 public class BilettRepsitory {
 
+    private Logger logger = LoggerFactory.getLogger(BilettRepsitory.class);
+
     @Autowired
     public JdbcTemplate db;
 
-    public void saveCustomer(Kunde kunde) {
-        String sql = "INSERT INTO Kunde(navn, telefon, epost, film, antall)";
-        sql += "VALUES (?, ?, ?, ?, ?)";
-        db.update(sql, kunde.getNavn(), kunde.getTelefon(), kunde.getEpost(), kunde.getFilm(),
-                kunde.getAntall());
+    public boolean saveCustomer(Kunde kunde) {
+        String sql = "INSERT INTO Kunde(fornavn, etternavn, telefon, epost, film, antall)";
+        sql += "VALUES (?, ?, ?, ?, ?, ?)";
+        try{
+            db.update(sql, kunde.getFornavn(), kunde.getEtternavn(), kunde.getTelefon(), kunde.getEpost(),
+                    kunde.getFilm(), kunde.getAntall());
+            return true;
+        }
+        catch (Exception e) {
+            logger.error("Error in saveCustomer : " + e);
+            return false;
+        }
     }
 
     public List<Kunde> fetchCustomers() {
         String sql = "SELECT * FROM Kunde";
         List<Kunde> allCustomers = db.query(sql, new BeanPropertyRowMapper<>(Kunde.class));
-        Collections.sort(allCustomers, new Comparator<Kunde>() {
-            @Override
-            public int compare(Kunde k1, Kunde k2) {
-                return k1.getNavn().compareTo(k2.getNavn());
-            }
-        });
-        return allCustomers;
+        try{
+            Collections.sort(allCustomers, new Comparator<Kunde>() {
+                @Override
+                public int compare(Kunde k1, Kunde k2) {
+                    return k1.getEtternavn().compareTo(k2.getEtternavn());
+                }
+            });
+            return allCustomers;
+        }
+        catch (Exception e) {
+            logger.error("Error in fetchCustomers : " + e);
+            return null;
+        }
     }
 
     public List<Filmer> fetchMovies() {
@@ -40,8 +57,15 @@ public class BilettRepsitory {
         return allMovies;
     }
 
-    public void deleteAllCustomers() {
+    public boolean deleteAllCustomers() {
         String sql = "DELETE FROM Kunde";
-        db.update(sql);
+        try {
+            db.update(sql);
+            return true;
+        }
+        catch (Exception e) {
+            logger.error("Error in deleteAllCustomers : " + e);
+            return false;
+        }
     }
 }

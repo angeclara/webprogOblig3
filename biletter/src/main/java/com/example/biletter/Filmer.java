@@ -1,5 +1,6 @@
 package com.example.biletter;
 
+// POJO for Filmer class
 public class Filmer {
     private String film;
 

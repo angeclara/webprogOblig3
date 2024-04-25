@@ -1,5 +1,7 @@
 package com.example.biletter;
 
+
+// POJO for Kunde Class
 public class Kunde {
     String fornavn, etternavn, film, telefon, epost;
     int antall;

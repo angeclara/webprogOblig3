@@ -14,11 +14,15 @@ import java.util.List;
 @Repository
 public class BilettRepsitory {
 
+    // This is a Logger object that is used to generate error messages visible
     private Logger logger = LoggerFactory.getLogger(BilettRepsitory.class);
 
+    // This is a Jdbc object used to make changes to a database
     @Autowired
     public JdbcTemplate db;
 
+
+    // This method is used to save a customer to the Kunde table, this is done using SQL statements
     public boolean saveCustomer(Kunde kunde) {
         String sql = "INSERT INTO Kunde(fornavn, etternavn, telefon, epost, film, antall)";
         sql += "VALUES (?, ?, ?, ?, ?, ?)";
@@ -33,10 +37,17 @@ public class BilettRepsitory {
         }
     }
 
+
+    /* This method is used to fetch customers from the Kunde table, the fetched customers will then be added to
+    an arraylist of the type Kunde, the method will return the list */
     public List<Kunde> fetchCustomers() {
         String sql = "SELECT * FROM Kunde";
         List<Kunde> allCustomers = db.query(sql, new BeanPropertyRowMapper<>(Kunde.class));
+
         try{
+
+            /* Here I use the Collections' sort method and implement the comparator interface
+            to sort the listed items by the etternavn */
             Collections.sort(allCustomers, new Comparator<Kunde>() {
                 @Override
                 public int compare(Kunde k1, Kunde k2) {
@@ -51,14 +62,18 @@ public class BilettRepsitory {
         }
     }
 
+    /* This method is used to fetch movies from the Filmer table, the fetched movies will then be added to
+    an arraylist of the type Filmer, and return the list */
     public List<Filmer> fetchMovies() {
         String sql = "SELECT * FROM Filmer";
         List<Filmer> allMovies = db.query(sql, new BeanPropertyRowMapper<>(Filmer.class));
         return allMovies;
     }
 
+    // This method is used to delete the items in the Kunde table.
     public boolean deleteAllCustomers() {
         String sql = "DELETE FROM Kunde";
+
         try {
             db.update(sql);
             return true;

@@ -12,9 +12,12 @@ import java.util.List;
 
 @RestController
 public class BilettController {
+
+    // rep object!
     @Autowired
     BilettRepsitory rep;
 
+    // This method stores the user input from the client in the database
     @PostMapping("/save")
     public void saveCustomer(Kunde innKunde, HttpServletResponse response) throws IOException {
         if (!rep.saveCustomer(innKunde)) {
@@ -23,6 +26,7 @@ public class BilettController {
         }
     }
 
+    // This method sends a list of customers to the client
     @GetMapping("/fetch")
     public List<Kunde> fetchCustomers(HttpServletResponse response) throws IOException {
         List<Kunde> allCustomers = rep.fetchCustomers();
@@ -34,18 +38,18 @@ public class BilettController {
         return allCustomers;
     }
 
+    // This method sends a list of movies to the client
     @GetMapping("/fetchMovies")
     public List<Filmer> fetchMovies() {
         return rep.fetchMovies();
     }
 
+    // This method deletes the items of the Kunde table
     @GetMapping("/delete")
-    public void  deleteCustomers(HttpServletResponse response) throws IOException {
+    public void deleteCustomers(HttpServletResponse response) throws IOException {
         List<Kunde> allCustomers = rep.fetchCustomers();
-
-        if (allCustomers == null) {
+        if (!rep.deleteAllCustomers()) {
             response.sendError(HttpStatus.NO_CONTENT.value(), "No tickets to delete!");
         }
-        rep.deleteAllCustomers();
     }
 }

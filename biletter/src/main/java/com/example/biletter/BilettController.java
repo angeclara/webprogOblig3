@@ -22,7 +22,7 @@ public class BilettController {
     public void saveCustomer(Kunde innKunde, HttpServletResponse response) throws IOException {
         if (!rep.saveCustomer(innKunde)) {
             response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    "Error in DB, pick a movie! An account can only have one number!");
+                    "Error in DB, pick a movie!");
         }
     }
 
@@ -51,5 +51,23 @@ public class BilettController {
         if (!rep.deleteAllCustomers()) {
             response.sendError(HttpStatus.NO_CONTENT.value(), "No tickets to delete!");
         }
+    }
+
+    // This method is used to modify the customers information
+    @PostMapping("/modify")
+    public void modifyCustomer(Kunde customer) {
+        rep.modifyCustomer(customer);
+    }
+
+    // this method is used to fetch one custommer
+    @GetMapping("/fetchCustomer")
+    public Kunde fetchCustomer(int id) {
+        return rep.fetchACustomer(id);
+    }
+
+    // This method is used to delete a specifc customer
+    @GetMapping("/deleteCustomer")
+    public void deleteCustomer(int id) {
+        rep.deleteCustomer(id);
     }
 }

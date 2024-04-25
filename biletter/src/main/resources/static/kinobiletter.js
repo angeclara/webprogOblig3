@@ -140,13 +140,17 @@ function getAll() {
 // This function is used to list the customers in a table, I've used an extended for loop to do this.
 function formatCustomers(customers) {
     let ut = "<table class='table table-striped'>"
-    ut += "<tr><th>Navn</th><th>Telefonnr</th><th>E-post</th><th>antall</th><th>film</th>"
+    ut += "<tr><th>Navn</th><th>Telefonnr</th><th>E-post</th><th>antall</th><th>film</th><th></th><th></th>"
     for (const customer of customers) {
         ut += "<tr>";
         ut += "<td>" + customer.fornavn + " " + customer.etternavn + "</td>";
         ut += "<td>" + customer.telefon + "</td>";
         ut += "<td>" + customer.epost + "</td>";
-        ut += "<td>" + customer.antall + "x</td>" + "<td>" + customer.film + "</td></tr>";
+        ut += "<td>" + customer.antall + "x</td>" + "<td>" + customer.film + "</td>";
+
+        // These buttons are is so that the user can modify specific customer information or delete a customer  all together
+        ut += "<td><a class='btn btn-primary' href='/modifycustomer.html?id= " + customer.id + "'>endre kunde</a></td>";
+        ut += "<td><button class='btn btn-danger' onclick='deleteCustomer(" + customer.id + ")' type='button'>slett</button></td></tr>";
     }
     ut += "</table>"
     $("#customerRegistry").html(ut);
@@ -162,4 +166,12 @@ function slett() {
             const json = $.parseJSON(jqXHR.responseText);
             $("#deleteerror").text(json.message);
         });
+}
+
+// This function is used to delete a specific customer, I call upon the getAll() function again to reload the new list!
+function deleteCustomer(id) {
+    const url = "/deleteCustomer?id=" + id;
+    $.get(url, function () {
+        getAll();
+    });
 }

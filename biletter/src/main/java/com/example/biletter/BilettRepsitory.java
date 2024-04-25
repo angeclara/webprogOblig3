@@ -83,4 +83,23 @@ public class BilettRepsitory {
             return false;
         }
     }
+
+    // This method returns one customer from their id
+    public Kunde fetchACustomer(int id) {
+        String sql = "SELECT * FROM Kunde WHERE id=?";
+        Kunde customer = db.queryForObject(sql, BeanPropertyRowMapper.newInstance(Kunde.class), id);
+        return customer;
+    }
+
+    // This method is used to modify the values of a customer in the Kunde table
+    public void modifyCustomer(Kunde customer) {
+        String sql = "UPDATE Kunde SET fornavn=?, etternavn=?, telefon=?, epost=? WHERE id=?";
+        db.update(sql,customer.getFornavn(),customer.getEtternavn(), customer.getTelefon(),customer.epost, customer.getId());
+    }
+
+    // This method is used to delete a customer from the table using the specific customer id
+    public void deleteCustomer(int id) {
+        String sql = "DELETE FROM Kunde WHERE id=?";
+        db.update(sql,id);
+    }
 }
